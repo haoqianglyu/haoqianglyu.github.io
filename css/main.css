@@ -1221,7 +1221,7 @@ pre .javascript .function {
 .use-motion .custom-logo-image {
   opacity: 0;
   position: relative;
-  /*top: -10px;*/
+  top: -10px;
 }
 .site-nav-toggle {
   display: none;
@@ -2735,7 +2735,7 @@ body {
   font-weight: initial;
 }
 .custom-logo-image {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 @media (max-width: 991px) {
   .custom-logo-image {
