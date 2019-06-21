@@ -128,14 +128,14 @@
 
   <meta name="description" content="Recently, I faced up a problem in my project. I tried to use generic type in my project, but when it came to the hibernate hql, I can not get the generic type. Following is the solution: Let’s beginSt">
 <meta property="og:type" content="article">
-<meta property="og:title" content="how to get generic class type in hql">
+<meta property="og:title" content="how to get generic class type in HQL">
 <meta property="og:url" content="http://yoursite.com/2019/06/21/Get-Generic-class-type-in-hql/index.html">
 <meta property="og:site_name" content="Haoqiang Lyu">
 <meta property="og:description" content="Recently, I faced up a problem in my project. I tried to use generic type in my project, but when it came to the hibernate hql, I can not get the generic type. Following is the solution: Let’s beginSt">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-21T18:47:38.692Z">
+<meta property="og:updated_time" content="2019-06-21T19:17:41.817Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="how to get generic class type in hql">
+<meta name="twitter:title" content="how to get generic class type in HQL">
 <meta name="twitter:description" content="Recently, I faced up a problem in my project. I tried to use generic type in my project, but when it came to the hibernate hql, I can not get the generic type. Following is the solution: Let’s beginSt">
 
 
@@ -154,7 +154,7 @@
   };
 </script>
 
-  <title>how to get generic class type in hql | Haoqiang Lyu</title>
+  <title>how to get generic class type in HQL | Haoqiang Lyu</title>
   
 
 
@@ -470,7 +470,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">how to get generic class type in hql
+          <h1 class="post-title" itemprop="name headline">how to get generic class type in HQL
 
               
             
@@ -496,7 +496,7 @@
                 
               
 
-              <time title="Created: 2019-06-21 14:14:21 / Modified: 14:47:38" itemprop="dateCreated datePublished" datetime="2019-06-21T14:14:21-04:00">2019-06-21</time>
+              <time title="Created: 2019-06-21 14:14:21 / Modified: 15:17:41" itemprop="dateCreated datePublished" datetime="2019-06-21T14:14:21-04:00">2019-06-21</time>
             
 
             
@@ -552,10 +552,12 @@
 <h2 id="Let’s-begin"><a href="#Let’s-begin" class="headerlink" title="Let’s begin"></a>Let’s begin</h2><h3 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1:"></a>Step 1:</h3><p>Suppose I have a normal class like findById.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">    public User findById(Long id) &#123;</span><br><span class="line">        String hql = <span class="string">"FROM User u where u.id = :userId"</span>;</span><br><span class="line">        Session s = sessionFactory.getCurrentSession();</span><br><span class="line">        TypedQuery&lt;User&gt; query = s.createQuery(hql);</span><br><span class="line">        query.setParameter(<span class="string">"userId"</span>, id);</span><br><span class="line">        <span class="built_in">return</span> query.getSingleResult();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
+<a id="more"></a>
+
 <h3 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2:"></a>Step 2:</h3><p>I write a CRUDDaoImpl to let all the class be generic type.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Repository // new CRUDDaoImpl()</span><br><span class="line">@Transactional</span><br><span class="line">//T=B, ID=IB</span><br><span class="line">public abstract class CRUDDaoImpl&lt;B,IB&gt; implements CRUDDao&lt;B,IB&gt;&#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private SessionFactory sessionFactory;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public B findById(IB ib) &#123;</span><br><span class="line">        String hql = <span class="string">"FROM "</span>+xxx +<span class="string">" b where b.id = :iibb"</span>;</span><br><span class="line">        TypedQuery&lt;B&gt; query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(<span class="string">"iibb"</span>,ib);</span><br><span class="line">        <span class="built_in">return</span> query.getSingleResult();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3:"></a>Step 3:</h3><p>Here we are going to get the class type of B to replace the “xxx” in the hql.</p>
+<h3 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3:"></a>Step 3:</h3><p>Here we are going to get the class type of B to replace the “xxx” in the HQL.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@Repository // new CRUDDaoImpl()</span><br><span class="line">@Transactional</span><br><span class="line">//T=B, ID=IB</span><br><span class="line">public abstract class CRUDDaoImpl&lt;B,IB&gt; implements CRUDDao&lt;B,IB&gt;&#123;</span><br><span class="line"></span><br><span class="line">    protected Class&lt;B&gt; hQLEntityClazz;</span><br><span class="line"></span><br><span class="line">    public abstract void setHQLEntityClazz();</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private SessionFactory sessionFactory;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public B findById(IB ib) &#123;</span><br><span class="line">        String hql = <span class="string">"FROM "</span>+hQLEntityClazz.getName() +<span class="string">" b where b.id = :iibb"</span>;</span><br><span class="line">        TypedQuery&lt;B&gt; query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(<span class="string">"iibb"</span>,ib);</span><br><span class="line">        <span class="built_in">return</span> query.getSingleResult();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Here we should implement the setHQLEntityClazz method in the UserDaoImpl:</p>
@@ -868,6 +870,9 @@
 
 
   
+  <script src="/js/js.cookie.js?v=7.1.2"></script>
+  <script src="/js/scroll-cookie.js?v=7.1.2"></script>
+
 
   
 
@@ -891,7 +896,7 @@
   var disqus_config = function() {
     this.page.url = "http://yoursite.com/2019/06/21/Get-Generic-class-type-in-hql/";
     this.page.identifier = "2019/06/21/Get-Generic-class-type-in-hql/";
-    this.page.title = 'how to get generic class type in hql';
+    this.page.title = 'how to get generic class type in HQL';
     };
   function loadComments() {
     var d = document, s = d.createElement('script');
