@@ -2736,11 +2736,10 @@ body {
 }
 .custom-logo-image {
   margin-top: 20px;
-  display: block
 }
 @media (max-width: 991px) {
   .custom-logo-image {
-    display: none;
+    display: block;
   }
 }
 .site-search form {
