@@ -1920,7 +1920,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #fa393c;
+  background: #ffc7b9;
 }
 .feed-link,
 .chat {
@@ -2735,7 +2735,7 @@ body {
   font-weight: initial;
 }
 .custom-logo-image {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 @media (max-width: 991px) {
   .custom-logo-image {
