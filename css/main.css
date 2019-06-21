@@ -2735,7 +2735,7 @@ body {
   font-weight: initial;
 }
 .custom-logo-image {
-  margin-top: 10px;
+  margin-bottom: 10px;
 }
 @media (max-width: 991px) {
   .custom-logo-image {
