@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Haoqiang Lyu</title>
+  
+  <subtitle>Studio</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-06-22T16:58:39.429Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Haoqiang Lyu</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>how to get generic class type in HQL</title>
+    <link href="http://yoursite.com/2019/06/21/Get-Generic-class-type-in-hql/"/>
+    <id>http://yoursite.com/2019/06/21/Get-Generic-class-type-in-hql/</id>
+    <published>2019-06-21T18:14:21.000Z</published>
+    <updated>2019-06-22T16:58:39.429Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Sat Jun 22 2019 13:12:29 GMT-0400 (EDT) --&gt;&lt;p&gt;Recently, I faced up a problem in my project. I tried to use generic type in my project, but when it came to the hibernate hql, I can not get the generic type. Following is the solution:&lt;/p&gt;&lt;h2 id=&quot;Let’s-begin&quot;&gt;&lt;a href=&quot;#Let’s-begin&quot; class=&quot;headerlink&quot; title=&quot;Let’s begin&quot;&gt;&lt;/a&gt;Let’s begin&lt;/h2&gt;&lt;h3 id=&quot;Step-1&quot;&gt;&lt;a href=&quot;#Step-1&quot; class=&quot;headerlink&quot; title=&quot;Step 1:&quot;&gt;&lt;/a&gt;Step 1:&lt;/h3&gt;&lt;p&gt;Suppose I have a normal class like findById.&lt;/p&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@Override&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public User findById(Long id) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        String hql = &lt;span class=&quot;string&quot;&gt;&quot;FROM User u where u.id = :userId&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        Session s = sessionFactory.getCurrentSession();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        TypedQuery&amp;lt;User&amp;gt; query = s.createQuery(hql);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        query.setParameter(&lt;span class=&quot;string&quot;&gt;&quot;userId&quot;&lt;/span&gt;, id);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;return&lt;/span&gt; query.getSingleResult();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="HQL" scheme="http://yoursite.com/tags/HQL/"/>
+    
+      <category term="Hibernate" scheme="http://yoursite.com/tags/Hibernate/"/>
+    
+      <category term="generic type" scheme="http://yoursite.com/tags/generic-type/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2019/06/20/hello-world/"/>
+    <id>http://yoursite.com/2019/06/20/hello-world/</id>
+    <published>2019-06-20T18:11:07.951Z</published>
+    <updated>2019-06-22T17:00:01.799Z</updated>
+    
+    <summary type="html">
+    
+      &lt;!-- build time:Sat Jun 22 2019 13:12:29 GMT-0400 (EDT) --&gt;&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+  </entry>
+  
+</feed>
