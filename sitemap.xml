@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://haoqianglyu.github.io/photo/data.json</loc>
+    
+    <lastmod>2019-08-07T21:45:50.004Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://haoqianglyu.github.io/photo/index.html</loc>
+    
+    <lastmod>2019-08-07T21:19:33.056Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://haoqianglyu.github.io/favourite/index.html</loc>
     
-    <lastmod>2019-08-06T21:04:44.304Z</lastmod>
+    <lastmod>2019-08-06T21:11:51.163Z</lastmod>
     
   </url>
   
@@ -26,13 +40,6 @@
     <loc>https://haoqianglyu.github.io/video/index.html</loc>
     
     <lastmod>2019-06-22T21:12:01.051Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://haoqianglyu.github.io/photo/index.html</loc>
-    
-    <lastmod>2019-06-22T20:28:40.249Z</lastmod>
     
   </url>
   
