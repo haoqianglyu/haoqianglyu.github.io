@@ -1,3 +1,3 @@
-// build time:Fri Aug 09 2019 16:14:31 GMT-0400 (Eastern Daylight Time)
+// build time:Fri Aug 09 2019 16:20:57 GMT-0400 (Eastern Daylight Time)
 $(document).ready(function(){var o=window.location.href.replace(window.location.origin,"");var i;$(window).on("scroll",function(){clearTimeout(i);i=setTimeout(function(){Cookies.set("scroll-cookie",$(window).scrollTop()+"|"+o,{expires:365,path:""})},250)});if(Cookies.get("scroll-cookie")!==undefined){var e=Cookies.get("scroll-cookie").split("|");if(e[1]===o){$(window).scrollTop(e[0])}}});
 //rebuild by neat 
