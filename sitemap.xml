@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://haoqianglyu.github.io/hello-world/</loc>
+    
+    <lastmod>2019-08-16T20:02:13.782Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://haoqianglyu.github.io/photos/index.html</loc>
     
-    <lastmod>2019-08-07T22:23:10.479Z</lastmod>
+    <lastmod>2019-08-12T14:19:24.719Z</lastmod>
     
   </url>
   
@@ -26,13 +33,6 @@
     <loc>https://haoqianglyu.github.io/Get-Generic-class-type-in-hql/</loc>
     
     <lastmod>2019-07-02T20:43:57.080Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://haoqianglyu.github.io/hello-world/</loc>
-    
-    <lastmod>2019-06-25T21:04:51.640Z</lastmod>
     
   </url>
   

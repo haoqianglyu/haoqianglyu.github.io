@@ -1,0 +1,3 @@
+// build time:Fri Aug 16 2019 16:23:19 GMT-0400 (Eastern Daylight Time)
+const ap=new APlayer({container:document.getElementById("aplayer"),fixed:true,autoplay:false,loop:"all",volume:.7,listFolded:true,listMaxHeight:60,audio:[{name:"lemon1",artist:"kenshi yonezu",url:"/uploads/Lemon_(hydro.fm).mp3",cover:"/uploads/lemon.png"},{name:"lemon2",artist:"kenshi yonezu",url:"/uploads/Lemon_(hydro.fm).mp3",cover:"/uploads/lemon.png"}]});
+//rebuild by neat 
