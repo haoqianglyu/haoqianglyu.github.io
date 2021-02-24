@@ -14,10 +14,16 @@ const ap = new APlayer({
             cover: '/uploads/lemon.png',
         },
         {
-            name: 'lemon2',
-            artist: 'kenshi yonezu',
-            url: 'http://www.170mv.com/kw/antiserver.kuwo.cn/anti.s?rid=MUSIC_167255208&response=res&format=mp3|aac&type=convert_url&br=128kmp3&agent=iPhone&callback=getlink&jpcallback=getlink.mp3',
-            cover: '/uploads/lemon.png',
+            name: '可不可以',
+            artist: '张紫豪',
+            url: 'https://mp32.9ku.com/upload/128/2018/09/12/881837.mp3',
+            cover: '/uploads/Picture1.jpg',
+        },
+        {
+            name: '辞九门回忆',
+            artist: '等什么君',
+            url: 'https://mp32.9ku.com/upload/128/2019/04/16/890196.mp3',
+            cover: '/uploads/Picture2.jpg',
         }
     ]
 });
