@@ -10,7 +10,7 @@ const ap = new APlayer({
         {
             name: '春风十里',
             artist: '鹿先森乐队',
-            url: 'https://www.170mv.com/kw/antiserver.kuwo.cn/anti.s?rid=MUSIC_6780189&response=res&format=mp3|aac&type=convert_url&br=128kmp3&agent=iPhone&callback=getlink&jpcallback=getlink.mp3',
+            url: 'https://mp32.9ku.com/upload/128/2016/04/06/671144.mp3',
             cover: '/uploads/Picture5.jpg',
         },
         {
