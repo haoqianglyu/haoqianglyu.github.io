@@ -1200,7 +1200,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #b1ffff;
+  background: #fa1887;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1725,6 +1725,29 @@ code {
   border-radius: 100%;
   background-color: rgba(0,0,0,0.75);
 }
+body {
+  background: url("/images/bg.jpeg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+.posts-expand {
+  background: var(--content-bg-color);
+  opacity: 0.9;
+}
+.content-wrap {
+  opacity: 0.9;
+}
+.sidebar {
+  opacity: 0.8;
+}
+.header-inner {
+  background: rgba(255,255,255,0.8);
+}
+.popup {
+  opacity: 0.8;
+}
 .posts-collapse {
   margin-left: 35px;
   position: relative;
@@ -1848,7 +1871,7 @@ code {
   display: none;
 }
 .content {
-  padding-top: 40px;
+  padding-top: 0px;
 }
 @media (min-width: 992px) {
   .post-body {
@@ -2464,7 +2487,6 @@ ul.breadcrumb li + li:last-child {
   }
 }
 .content-wrap {
-  background: var(--content-bg-color);
   border-radius: initial;
   box-shadow: initial;
   box-sizing: border-box;
@@ -2573,6 +2595,7 @@ ul.breadcrumb li + li:last-child {
   border-bottom: 1px solid #ddd;
   margin: 0;
   padding: 6px 0;
+  opacity: 0.5;
 }
 .sub-menu .menu-item {
   display: inline-block;
