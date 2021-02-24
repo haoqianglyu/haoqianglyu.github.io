@@ -1200,7 +1200,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #fa1887;
+  background: #87504d;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1575,6 +1575,7 @@ pre .javascript .function {
   text-align: center;
 }
 .use-motion .post-block {
+  background: var(--content-bg-color);
   opacity: 0;
   margin-top: 60px;
   margin-bottom: 60px;
@@ -1733,7 +1734,6 @@ body {
   background-position: 50% 50%;
 }
 .posts-expand {
-  background: var(--content-bg-color);
   opacity: 0.9;
 }
 .content-wrap {
