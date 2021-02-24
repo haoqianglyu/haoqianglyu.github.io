@@ -8,16 +8,16 @@ const ap = new APlayer({
     listMaxHeight: 60,
     audio: [
         {
-            name: '春风十里',
-            artist: '鹿先森乐队',
-            url: 'http://www.170mv.com/kw/antiserver.kuwo.cn/anti.s?rid=MUSIC_6780189&response=res&format=mp3|aac&type=convert_url&br=128kmp3&agent=iPhone&callback=getlink&jpcallback=getlink.mp3',
-            cover: '/uploads/Picture5.jpg',
-        },
-        {
             name: 'lemon',
             artist: '米精玄师',
             url: '/uploads/Lemon_(hydro.fm).mp3',
             cover: '/uploads/lemon.png',
+        },
+        {
+            name: '春风十里',
+            artist: '鹿先森乐队',
+            url: 'http://www.170mv.com/kw/antiserver.kuwo.cn/anti.s?rid=MUSIC_6780189&response=res&format=mp3|aac&type=convert_url&br=128kmp3&agent=iPhone&callback=getlink&jpcallback=getlink.mp3',
+            cover: '/uploads/Picture5.jpg',
         },
         {
             name: '可不可以',
