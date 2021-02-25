@@ -15,6 +15,8 @@
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
@@ -219,6 +221,93 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="https://haoqianglyu.github.io/2019/06/21/Get-Generic-class-type-in-hql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Haoqiang Lyu">
+      <meta itemprop="description" content="For you, a thousand times over.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Haoqiang Lyu">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/21/Get-Generic-class-type-in-hql/" class="post-title-link" itemprop="url">how to get generic class type in HQL</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-06-21 14:14:21" itemprop="dateCreated datePublished" datetime="2019-06-21T14:14:21+08:00">2019-06-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-24 16:59:39" itemprop="dateModified" datetime="2021-02-24T16:59:39+08:00">2021-02-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hibernate/" itemprop="url" rel="index"><span itemprop="name">Hibernate</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hibernate/HQL/" itemprop="url" rel="index"><span itemprop="name">HQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Recently, I faced up a problem in my project. I tried to use generic type in my project, but when it came to the hibernate hql, I can not get the generic type. Following is the solution:</p>
+<h2 id="Let’s-begin"><a href="#Let’s-begin" class="headerlink" title="Let’s begin"></a>Let’s begin</h2><h3 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1:"></a>Step 1:</h3><p>Suppose I have a normal class like findById.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">    public User findById(Long id) &#123;</span><br><span class="line">        String hql = <span class="string">&quot;FROM User u where u.id = :userId&quot;</span>;</span><br><span class="line">        Session s = sessionFactory.getCurrentSession();</span><br><span class="line">        TypedQuery&lt;User&gt; query = s.createQuery(hql);</span><br><span class="line">        query.setParameter(<span class="string">&quot;userId&quot;</span>, id);</span><br><span class="line">        <span class="built_in">return</span> query.getSingleResult();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/06/21/Get-Generic-class-type-in-hql/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
     <link itemprop="mainEntityOfPage" href="https://haoqianglyu.github.io/2021/02/20/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -276,93 +365,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/02/20/hello-world/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="https://haoqianglyu.github.io/2019/06/21/Get-Generic-class-type-in-hql/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Haoqiang Lyu">
-      <meta itemprop="description" content="For you, a thousand times over.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Haoqiang Lyu">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/06/21/Get-Generic-class-type-in-hql/" class="post-title-link" itemprop="url">how to get generic class type in HQL</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-06-21 14:14:21" itemprop="dateCreated datePublished" datetime="2019-06-21T14:14:21+08:00">2019-06-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-07-03 04:43:57" itemprop="dateModified" datetime="2019-07-03T04:43:57+08:00">2019-07-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hibernate/" itemprop="url" rel="index"><span itemprop="name">Hibernate</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hibernate/HQL/" itemprop="url" rel="index"><span itemprop="name">HQL</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Recently, I faced up a problem in my project. I tried to use generic type in my project, but when it came to the hibernate hql, I can not get the generic type. Following is the solution:</p>
-<h2 id="Let’s-begin"><a href="#Let’s-begin" class="headerlink" title="Let’s begin"></a>Let’s begin</h2><h3 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1:"></a>Step 1:</h3><p>Suppose I have a normal class like findById.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">    public User findById(Long id) &#123;</span><br><span class="line">        String hql = <span class="string">&quot;FROM User u where u.id = :userId&quot;</span>;</span><br><span class="line">        Session s = sessionFactory.getCurrentSession();</span><br><span class="line">        TypedQuery&lt;User&gt; query = s.createQuery(hql);</span><br><span class="line">        query.setParameter(<span class="string">&quot;userId&quot;</span>, id);</span><br><span class="line">        <span class="built_in">return</span> query.getSingleResult();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/06/21/Get-Generic-class-type-in-hql/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
