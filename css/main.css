@@ -983,7 +983,7 @@ pre .javascript .function {
 .site-brand-container {
   display: flex;
   flex-shrink: 0;
-  padding: 0 10px;
+  padding: 0 0px;
 }
 .headband {
   background: #222;
@@ -1200,7 +1200,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff8fd5;
+  background: #cc16d5;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2528,7 +2528,7 @@ ul.breadcrumb li + li:last-child {
   }
 }
 .site-meta {
-  padding: 20px 0;
+  padding: 20px 0 0 0;
 }
 .brand {
   padding: 0;
