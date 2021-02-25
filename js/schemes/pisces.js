@@ -67,7 +67,7 @@ var Affix = {
 };
 
 NexT.utils.getAffixParam = function() {
-  const sidebarOffset = CONFIG.sidebar.offset || 12;
+  const sidebarOffset = CONFIG.sidebar.offset || 20;
 
   let headerOffset = document.querySelector('.header-inner').offsetHeight;
   let footerOffset = document.querySelector('.footer').offsetHeight;
