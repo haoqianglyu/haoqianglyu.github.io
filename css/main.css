@@ -1200,7 +1200,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #cc16d5;
+  background: #fc7912;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1415,6 +1415,7 @@ pre .javascript .function {
   margin: 0 auto;
   text-align: center;
   width: calc(100% - 20px);
+  color: #000;
 }
 @media (min-width: 1200px) {
   .footer-inner {
