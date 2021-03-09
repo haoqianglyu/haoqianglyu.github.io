@@ -4,7 +4,7 @@
   <url>
     <loc>https://haoqianglyu.github.io/album/index.html</loc>
     
-    <lastmod>2021-03-03</lastmod>
+    <lastmod>2021-03-09</lastmod>
     
   </url>
   
@@ -46,13 +46,6 @@
 
   
   <url>
-    <loc>https://haoqianglyu.github.io/tags/hexo/</loc>
-    <lastmod>2021-03-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://haoqianglyu.github.io/tags/HQL/</loc>
     <lastmod>2021-03-09</lastmod>
     <changefreq>daily</changefreq>
@@ -73,17 +66,24 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>https://haoqianglyu.github.io/tags/hexo/</loc>
+    <lastmod>2021-03-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   
   <url>
-    <loc>https://haoqianglyu.github.io/categories/hexo/</loc>
+    <loc>https://haoqianglyu.github.io/categories/Hibernate/</loc>
     <lastmod>2021-03-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://haoqianglyu.github.io/categories/Hibernate/</loc>
+    <loc>https://haoqianglyu.github.io/categories/hexo/</loc>
     <lastmod>2021-03-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
