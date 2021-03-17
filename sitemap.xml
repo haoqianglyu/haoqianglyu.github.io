@@ -46,6 +46,13 @@
 
   
   <url>
+    <loc>https://haoqianglyu.github.io/tags/hexo/</loc>
+    <lastmod>2021-03-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://haoqianglyu.github.io/tags/HQL/</loc>
     <lastmod>2021-03-17</lastmod>
     <changefreq>daily</changefreq>
@@ -66,24 +73,17 @@
     <priority>0.6</priority>
   </url>
   
-  <url>
-    <loc>https://haoqianglyu.github.io/tags/hexo/</loc>
-    <lastmod>2021-03-17</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
 
   
   <url>
-    <loc>https://haoqianglyu.github.io/categories/Hibernate/</loc>
+    <loc>https://haoqianglyu.github.io/categories/hexo/</loc>
     <lastmod>2021-03-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://haoqianglyu.github.io/categories/hexo/</loc>
+    <loc>https://haoqianglyu.github.io/categories/Hibernate/</loc>
     <lastmod>2021-03-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
