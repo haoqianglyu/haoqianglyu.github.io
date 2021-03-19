@@ -27,6 +27,37 @@
       </tags>
   </entry>
   <entry>
+    <title>关于科学上网后导致push至GitHub出错</title>
+    <url>/2021/03/19/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E5%90%8E%E5%AF%BC%E8%87%B4push%E8%87%B3GitHub%E5%87%BA%E9%94%99/</url>
+    <content><![CDATA[<p>最近使用VPN科学上网时，导致了push到git的速度大幅减慢，最后还出现了push错误的情况，报错情况如下：</p>
+<center><img src="/images/problem.png"/></center>
+<!-- ![](/images/problem.png) -->
+搜索了下说是因为科学上网的原因，但是试了很多方法都没用，以下是我最后解决的方法（也贴上查到的其他方法，希望总有一个适合你）：
+### 方法1
+如果你开启了VPN，很可能是因为代理的问题，这时候设置一下http.proxy就可以了。
+比如我用的VPN是shadow，先查看当前VPN代理使用的端口号，如下图所示，我的端口号是1087
+<center><img src="/images/port.png" width="50%" height="50%"/></center>
+
+<p>所以，在git bash命令行中输入以下命令即可：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global http.proxy 127.0.0.1:1087</span><br><span class="line">git config --global https.proxy 127.0.0.1:1087</span><br></pre></td></tr></table></figure>
+<h3 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim ~/.gitconfig</span><br></pre></td></tr></table></figure>
+<p>把里面关于https的配置删掉，然后就可以了，原来代理配置被写入到了文件（这种情况应该适用于关掉VPN之后的情况）</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>如果你之前git中已经设置过上述配置，则使用如下命令取消再进行配置即可：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global --<span class="built_in">unset</span> http.proxy</span><br><span class="line">git config --global --<span class="built_in">unset</span> https.proxy</span><br></pre></td></tr></table></figure>
+<p>下面是几个常用的git配置查看命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global http.proxy <span class="comment">#查看git的http代理配置</span></span><br><span class="line">git config --global https.proxy <span class="comment">#查看git的https代理配置</span></span><br><span class="line">git config --global -l <span class="comment">#查看git的所有配置</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>GitHub</category>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+        <tag>hexo</tag>
+        <tag>http</tag>
+        <tag>vpn</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2021/02/20/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
