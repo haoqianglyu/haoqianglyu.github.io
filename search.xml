@@ -33,6 +33,7 @@
 <center><img src="/images/problem.png"/></center>
 <!-- ![](/images/problem.png) -->
 搜索了下说是因为科学上网的原因，但是试了很多方法都没用，以下是我最后解决的方法（也贴上查到的其他方法，希望总有一个适合你）：
+<a id="more"></a>
 
 <h3 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h3><p>如果你开启了VPN，很可能是因为代理的问题，这时候设置一下http.proxy就可以了。<br>比如我用的VPN是shadow，先查看当前VPN代理使用的端口号，如下图所示，我的端口号是1087</p>
 <center><img src="/images/port.png" width="50%" height="50%"/></center>
@@ -50,8 +51,8 @@
         <category>hexo</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
         <tag>git</tag>
+        <tag>hexo</tag>
         <tag>http</tag>
         <tag>vpn</tag>
       </tags>
