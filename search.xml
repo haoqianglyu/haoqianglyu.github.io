@@ -1,88 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title>how to get generic class type in HQL</title>
-    <url>/2019/06/21/Get-Generic-class-type-in-hql/</url>
-    <content><![CDATA[<p>Recently, I faced up a problem in my project. I tried to use generic type in my project, but when it came to the hibernate hql, I can not get the generic type. Following is the solution:</p>
-<h2 id="Let’s-begin"><a href="#Let’s-begin" class="headerlink" title="Let’s begin"></a>Let’s begin</h2><h3 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1:"></a>Step 1:</h3><p>Suppose I have a normal class like findById.</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line">    public User findById(Long id) &#123;</span><br><span class="line">        String hql = <span class="string">&quot;FROM User u where u.id = :userId&quot;</span>;</span><br><span class="line">        Session s = sessionFactory.getCurrentSession();</span><br><span class="line">        TypedQuery&lt;User&gt; query = s.createQuery(hql);</span><br><span class="line">        query.setParameter(<span class="string">&quot;userId&quot;</span>, id);</span><br><span class="line">        <span class="built_in">return</span> query.getSingleResult();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-
-<h3 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2:"></a>Step 2:</h3><p>I write a CRUDDaoImpl to let all the class be generic type.</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@Repository // new CRUDDaoImpl()</span><br><span class="line">@Transactional</span><br><span class="line">//T=B, ID=IB</span><br><span class="line">public abstract class CRUDDaoImpl&lt;B,IB&gt; implements CRUDDao&lt;B,IB&gt;&#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private SessionFactory sessionFactory;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public B findById(IB ib) &#123;</span><br><span class="line">        String hql = <span class="string">&quot;FROM &quot;</span>+xxx +<span class="string">&quot; b where b.id = :iibb&quot;</span>;</span><br><span class="line">        TypedQuery&lt;B&gt; query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(<span class="string">&quot;iibb&quot;</span>,ib);</span><br><span class="line">        <span class="built_in">return</span> query.getSingleResult();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3:"></a>Step 3:</h3><p>Here we are going to get the class type of B to replace the “xxx” in the HQL.</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@Repository // new CRUDDaoImpl()</span><br><span class="line">@Transactional</span><br><span class="line">//T=B, ID=IB</span><br><span class="line">public abstract class CRUDDaoImpl&lt;B,IB&gt; implements CRUDDao&lt;B,IB&gt;&#123;</span><br><span class="line"></span><br><span class="line">    protected Class&lt;B&gt; hQLEntityClazz;</span><br><span class="line"></span><br><span class="line">    public abstract void setHQLEntityClazz();</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private SessionFactory sessionFactory;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public B findById(IB ib) &#123;</span><br><span class="line">        String hql = <span class="string">&quot;FROM &quot;</span>+hQLEntityClazz.getName() +<span class="string">&quot; b where b.id = :iibb&quot;</span>;</span><br><span class="line">        TypedQuery&lt;B&gt; query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(<span class="string">&quot;iibb&quot;</span>,ib);</span><br><span class="line">        <span class="built_in">return</span> query.getSingleResult();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Here we should implement the setHQLEntityClazz method in the UserDaoImpl:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">public class UserDaoImpl extends CRUDDaoImpl&lt;User,Long&gt; implements UserDao&#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private SessionFactory sessionFactory;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    @Autowired</span><br><span class="line">    public void <span class="function"><span class="title">setHQLEntityClazz</span></span>() &#123;</span><br><span class="line">        this.hQLEntityClazz = User.class;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>That’s all, thank you!</p>
-]]></content>
+<search> 
+  
+  
+    
+    <entry>
+      <title>科学上网后导致push至GitHub出错</title>
+      <link href="2021/03/19/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E5%90%8E%E5%AF%BC%E8%87%B4push%E8%87%B3GitHub%E5%87%BA%E9%94%99/"/>
+      <url>2021/03/19/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E5%90%8E%E5%AF%BC%E8%87%B4push%E8%87%B3GitHub%E5%87%BA%E9%94%99/</url>
+      
+        <content type="html"><![CDATA[<p>最近使用VPN科学上网时，导致了push到git的速度大幅减慢，最后还出现了push错误的情况，报错情况如下：</p><center><img src="/images/problem.png"/></center>搜索了下说是因为科学上网的原因，但是试了很多方法都没用，以下是我最后解决的方法（也贴上查到的其他方法，希望总有一个适合你）：<a id="more"></a><h3 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h3><p>如果你开启了VPN，很可能是因为代理的问题，这时候设置一下http.proxy就可以了。<br>比如我用的VPN是shadow，先查看当前VPN代理使用的端口号，如下图所示，我的端口号是1087</p><center><img src="/images/port.png" width="50%" height="50%"/></center><p>所以，在git bash命令行中输入以下命令即可：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.proxy 127.0.0.1:1087</span><br><span class="line">git config --global https.proxy 127.0.0.1:1087</span><br></pre></td></tr></table></figure><h3 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.gitconfig</span><br></pre></td></tr></table></figure><p>把里面关于https的配置删掉，然后就可以了，原来代理配置被写入到了文件（这种情况应该适用于关掉VPN之后的情况）</p><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>如果你之前git中已经设置过上述配置，则使用如下命令取消再进行配置即可：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global --<span class="built_in">unset</span> http.proxy</span><br><span class="line">git config --global --<span class="built_in">unset</span> https.proxy</span><br></pre></td></tr></table></figure><p>下面是几个常用的git配置查看命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.proxy <span class="comment">#查看git的http代理配置</span></span><br><span class="line">git config --global https.proxy <span class="comment">#查看git的https代理配置</span></span><br><span class="line">git config --global -l <span class="comment">#查看git的所有配置</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
       <categories>
-        <category>Hibernate</category>
-        <category>HQL</category>
+          
+          <category> GitHub </category>
+          
+          <category> hexo </category>
+          
       </categories>
-      <tags>
-        <tag>HQL</tag>
-        <tag>Hibernate</tag>
-        <tag>generic type</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>科学上网后导致push至GitHub出错</title>
-    <url>/2021/03/19/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E5%90%8E%E5%AF%BC%E8%87%B4push%E8%87%B3GitHub%E5%87%BA%E9%94%99/</url>
-    <content><![CDATA[<p>最近使用VPN科学上网时，导致了push到git的速度大幅减慢，最后还出现了push错误的情况，报错情况如下：</p>
-<center><img src="/images/problem.png"/></center>
-搜索了下说是因为科学上网的原因，但是试了很多方法都没用，以下是我最后解决的方法（也贴上查到的其他方法，希望总有一个适合你）：
-
-<a id="more"></a>
-
-<h3 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h3><p>如果你开启了VPN，很可能是因为代理的问题，这时候设置一下http.proxy就可以了。<br>比如我用的VPN是shadow，先查看当前VPN代理使用的端口号，如下图所示，我的端口号是1087</p>
-<center><img src="/images/port.png" width="50%" height="50%"/></center>
-
-<p>所以，在git bash命令行中输入以下命令即可：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global http.proxy 127.0.0.1:1087</span><br><span class="line">git config --global https.proxy 127.0.0.1:1087</span><br></pre></td></tr></table></figure>
-<h3 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim ~/.gitconfig</span><br></pre></td></tr></table></figure>
-<p>把里面关于https的配置删掉，然后就可以了，原来代理配置被写入到了文件（这种情况应该适用于关掉VPN之后的情况）</p>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>如果你之前git中已经设置过上述配置，则使用如下命令取消再进行配置即可：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global --<span class="built_in">unset</span> http.proxy</span><br><span class="line">git config --global --<span class="built_in">unset</span> https.proxy</span><br></pre></td></tr></table></figure>
-<p>下面是几个常用的git配置查看命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global http.proxy <span class="comment">#查看git的http代理配置</span></span><br><span class="line">git config --global https.proxy <span class="comment">#查看git的https代理配置</span></span><br><span class="line">git config --global -l <span class="comment">#查看git的所有配置</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+            <tag> git </tag>
+            
+            <tag> http </tag>
+            
+            <tag> vpn </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="2021/02/20/hello-world/"/>
+      <url>2021/02/20/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><p><span id="inline-blue"> blue test block </span><br><span id="inline-purple"> purple test block </span><br><span id="inline-yellow"> yellow test block </span><br><span id="inline-green"> green test block </span></p><!-- <center><b>2017_12_19_视频1</b></center><div id="dplayer0" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer0"),"video":{"url":"https://lc-gluttony.s3.amazonaws.com/qpLO4IIFvprw/adb1aa176e5873c28a74.mp4/520%20LOL.mp4"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> --><p><a id="download" href="https://git-scm.com/download/win"><i class="fa fa-download"></i><span> Download Now</span> </a></p><p><i class="fa fa-pencil"></i>awesome pencil icon test</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><a id="more"></a><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html">Deployment</a></p>]]></content>
+      
+      
       <categories>
-        <category>GitHub</category>
-        <category>hexo</category>
+          
+          <category> hexo </category>
+          
       </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>git</tag>
-        <tag>http</tag>
-        <tag>vpn</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2021/02/20/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<p><span id="inline-blue"> blue test block </span><br><span id="inline-purple"> purple test block </span><br><span id="inline-yellow"> yellow test block </span><br><span id="inline-green"> green test block </span></p>
-<!-- <center><b>2017_12_19_视频1</b></center>
-<div id="dplayer0" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer0"),"video":{"url":"https://lc-gluttony.s3.amazonaws.com/qpLO4IIFvprw/adb1aa176e5873c28a74.mp4/520%20LOL.mp4"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> -->
-
-<p><a id="download" href="https://git-scm.com/download/win"><i class="fa fa-download"></i><span> Download Now</span> </a></p>
-<p><i class="fa fa-pencil"></i>awesome pencil icon test</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<a id="more"></a>
-
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html">Deployment</a></p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>how to get generic class type in HQL</title>
+      <link href="2019/06/21/Get-Generic-class-type-in-hql/"/>
+      <url>2019/06/21/Get-Generic-class-type-in-hql/</url>
+      
+        <content type="html"><![CDATA[<p>Recently, I faced up a problem in my project. I tried to use generic type in my project, but when it came to the hibernate hql, I can not get the generic type. Following is the solution:</p><h2 id="Let’s-begin"><a href="#Let’s-begin" class="headerlink" title="Let’s begin"></a>Let’s begin</h2><h3 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1:"></a>Step 1:</h3><p>Suppose I have a normal class like findById.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">    public User findById(Long id) &#123;</span><br><span class="line">        String hql = <span class="string">&quot;FROM User u where u.id = :userId&quot;</span>;</span><br><span class="line">        Session s = sessionFactory.getCurrentSession();</span><br><span class="line">        TypedQuery&lt;User&gt; query = s.createQuery(hql);</span><br><span class="line">        query.setParameter(<span class="string">&quot;userId&quot;</span>, id);</span><br><span class="line">        <span class="built_in">return</span> query.getSingleResult();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><a id="more"></a><h3 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2:"></a>Step 2:</h3><p>I write a CRUDDaoImpl to let all the class be generic type.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@Repository // new CRUDDaoImpl()</span><br><span class="line">@Transactional</span><br><span class="line">//T=B, ID=IB</span><br><span class="line">public abstract class CRUDDaoImpl&lt;B,IB&gt; implements CRUDDao&lt;B,IB&gt;&#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private SessionFactory sessionFactory;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public B findById(IB ib) &#123;</span><br><span class="line">        String hql = <span class="string">&quot;FROM &quot;</span>+xxx +<span class="string">&quot; b where b.id = :iibb&quot;</span>;</span><br><span class="line">        TypedQuery&lt;B&gt; query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(<span class="string">&quot;iibb&quot;</span>,ib);</span><br><span class="line">        <span class="built_in">return</span> query.getSingleResult();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><h3 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3:"></a>Step 3:</h3><p>Here we are going to get the class type of B to replace the “xxx” in the HQL.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@Repository // new CRUDDaoImpl()</span><br><span class="line">@Transactional</span><br><span class="line">//T=B, ID=IB</span><br><span class="line">public abstract class CRUDDaoImpl&lt;B,IB&gt; implements CRUDDao&lt;B,IB&gt;&#123;</span><br><span class="line"></span><br><span class="line">    protected Class&lt;B&gt; hQLEntityClazz;</span><br><span class="line"></span><br><span class="line">    public abstract void setHQLEntityClazz();</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private SessionFactory sessionFactory;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public B findById(IB ib) &#123;</span><br><span class="line">        String hql = <span class="string">&quot;FROM &quot;</span>+hQLEntityClazz.getName() +<span class="string">&quot; b where b.id = :iibb&quot;</span>;</span><br><span class="line">        TypedQuery&lt;B&gt; query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(<span class="string">&quot;iibb&quot;</span>,ib);</span><br><span class="line">        <span class="built_in">return</span> query.getSingleResult();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>Here we should implement the setHQLEntityClazz method in the UserDaoImpl:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class UserDaoImpl extends CRUDDaoImpl&lt;User,Long&gt; implements UserDao&#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private SessionFactory sessionFactory;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    @Autowired</span><br><span class="line">    public void <span class="function"><span class="title">setHQLEntityClazz</span></span>() &#123;</span><br><span class="line">        this.hQLEntityClazz = User.class;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>That’s all, thank you!</p>]]></content>
+      
+      
       <categories>
-        <category>hexo</category>
+          
+          <category> Hibernate </category>
+          
+          <category> HQL </category>
+          
       </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
+      
+      
+        <tags>
+            
+            <tag> HQL </tag>
+            
+            <tag> Hibernate </tag>
+            
+            <tag> generic type </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
 </search>
