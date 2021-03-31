@@ -2,14 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://haoqianglyu.github.io/2019/06/21/Get-Generic-class-type-in-hql/</loc>
+    <loc>https://haoqianglyu.github.io/2021/03/31/%E4%BD%BF%E7%94%A8AWS-EC2%E5%BB%BA%E7%AB%8BVPN%E6%95%99%E7%A8%8B/</loc>
     
-    <lastmod>2021-03-19</lastmod>
+    <lastmod>2021-03-31</lastmod>
     
   </url>
   
   <url>
     <loc>https://haoqianglyu.github.io/2021/03/19/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E5%90%8E%E5%AF%BC%E8%87%B4push%E8%87%B3GitHub%E5%87%BA%E9%94%99/</loc>
+    
+    <lastmod>2021-03-31</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://haoqianglyu.github.io/2019/06/21/Get-Generic-class-type-in-hql/</loc>
     
     <lastmod>2021-03-19</lastmod>
     
@@ -53,57 +60,71 @@
 
   <url>
     <loc>https://haoqianglyu.github.io/</loc>
-    <lastmod>2021-03-30</lastmod>
+    <lastmod>2021-03-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://haoqianglyu.github.io/tags/hexo/</loc>
-    <lastmod>2021-03-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://haoqianglyu.github.io/tags/HQL/</loc>
-    <lastmod>2021-03-30</lastmod>
+    <lastmod>2021-03-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://haoqianglyu.github.io/tags/Hibernate/</loc>
-    <lastmod>2021-03-30</lastmod>
+    <lastmod>2021-03-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://haoqianglyu.github.io/tags/generic-type/</loc>
-    <lastmod>2021-03-30</lastmod>
+    <lastmod>2021-03-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://haoqianglyu.github.io/tags/hexo/</loc>
+    <lastmod>2021-03-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://haoqianglyu.github.io/tags/AWS/</loc>
+    <lastmod>2021-03-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://haoqianglyu.github.io/tags/VPN/</loc>
+    <lastmod>2021-03-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://haoqianglyu.github.io/tags/EC2/</loc>
+    <lastmod>2021-03-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://haoqianglyu.github.io/tags/git/</loc>
-    <lastmod>2021-03-30</lastmod>
+    <lastmod>2021-03-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://haoqianglyu.github.io/tags/http/</loc>
-    <lastmod>2021-03-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://haoqianglyu.github.io/tags/vpn/</loc>
-    <lastmod>2021-03-30</lastmod>
+    <lastmod>2021-03-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -111,36 +132,50 @@
 
   
   <url>
-    <loc>https://haoqianglyu.github.io/categories/hexo/</loc>
-    <lastmod>2021-03-30</lastmod>
+    <loc>https://haoqianglyu.github.io/categories/Hibernate/</loc>
+    <lastmod>2021-03-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://haoqianglyu.github.io/categories/Hibernate/</loc>
-    <lastmod>2021-03-30</lastmod>
+    <loc>https://haoqianglyu.github.io/categories/hexo/</loc>
+    <lastmod>2021-03-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://haoqianglyu.github.io/categories/AWS/</loc>
+    <lastmod>2021-03-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://haoqianglyu.github.io/categories/GitHub/</loc>
-    <lastmod>2021-03-30</lastmod>
+    <lastmod>2021-03-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://haoqianglyu.github.io/categories/Hibernate/HQL/</loc>
-    <lastmod>2021-03-30</lastmod>
+    <lastmod>2021-03-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://haoqianglyu.github.io/categories/AWS/VPN/</loc>
+    <lastmod>2021-03-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://haoqianglyu.github.io/categories/GitHub/hexo/</loc>
-    <lastmod>2021-03-30</lastmod>
+    <lastmod>2021-03-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
