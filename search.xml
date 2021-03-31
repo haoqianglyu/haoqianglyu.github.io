@@ -1,127 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-  
-    
-    <entry>
-      <title>使用AWS EC2建立VPN教程</title>
-      <link href="2021/03/31/%E4%BD%BF%E7%94%A8AWS-EC2%E5%BB%BA%E7%AB%8BVPN%E6%95%99%E7%A8%8B/"/>
-      <url>2021/03/31/%E4%BD%BF%E7%94%A8AWS-EC2%E5%BB%BA%E7%AB%8BVPN%E6%95%99%E7%A8%8B/</url>
-      
-        <content type="html"><![CDATA[<p>之前一直用的是买的的VPN，价格基本都是几十块一个月不等，其实想自己搭VPN很久了，就是一直懒，哈哈哈哈，前阵子抽空用AWS的EC2搭了一套VPN，粗略的加速了下，测试下来速度比买的Justmysocks速度快了一倍，看个Youtube 1080p完全不卡，进度条随意拖动，教程如下。</p><h3 id="注册AWS账号"><a href="#注册AWS账号" class="headerlink" title="注册AWS账号"></a>注册AWS账号</h3><p>首先要注册一个AWS的账号，英文不好的童鞋可以把语言切换成中文。至于需要填什么，自己打开来看吧，因为我的账号注册了很久了，已经忘记了，应该要绑定一张支持全币种的Visa卡，Amazon会进行信用卡严重，虚拟的扣1刀来验证信用卡是否有效，不过后续会在账单上退回，不必担心。</p><a id="more"></a><h3 id="选择服务，切换服务器地区"><a href="#选择服务，切换服务器地区" class="headerlink" title="选择服务，切换服务器地区"></a>选择服务，切换服务器地区</h3><p>点击选择EC2服务，右上角切换服务器所在地区，我选择的是Tokyo(东京)</p><center><img src="/images/1.png"/></center><h3 id="创建EC2实例"><a href="#创建EC2实例" class="headerlink" title="创建EC2实例"></a>创建EC2实例</h3><h4 id="点击图中的“Launch-Instance”创建实例"><a href="#点击图中的“Launch-Instance”创建实例" class="headerlink" title="点击图中的“Launch Instance”创建实例"></a>点击图中的“Launch Instance”创建实例</h4><center><img src="/images/2.png"/></center><h4 id="选择带Free-tier-eligible的机器，这里选的是Ubuntu-Server-18-04-LTS这款"><a href="#选择带Free-tier-eligible的机器，这里选的是Ubuntu-Server-18-04-LTS这款" class="headerlink" title="选择带Free tier eligible的机器，这里选的是Ubuntu Server 18.04 LTS这款"></a>选择带Free tier eligible的机器，这里选的是Ubuntu Server 18.04 LTS这款</h4><center><img src="/images/3.png"/></center><h4 id="之后还是选择带Free-tier-eligible的机器，配置不高，但是搭建VPN还是可以的"><a href="#之后还是选择带Free-tier-eligible的机器，配置不高，但是搭建VPN还是可以的" class="headerlink" title="之后还是选择带Free tier eligible的机器，配置不高，但是搭建VPN还是可以的"></a>之后还是选择带Free tier eligible的机器，配置不高，但是搭建VPN还是可以的</h4><center><img src="/images/4.png"/></center><h4 id="在之后的页面中点击Launch按钮，会弹出这个框，需要设置密钥对，设置完后下载密钥对，之后再Launch-Instances，密钥对在后面会用于登陆服务器"><a href="#在之后的页面中点击Launch按钮，会弹出这个框，需要设置密钥对，设置完后下载密钥对，之后再Launch-Instances，密钥对在后面会用于登陆服务器" class="headerlink" title="在之后的页面中点击Launch按钮，会弹出这个框，需要设置密钥对，设置完后下载密钥对，之后再Launch Instances，密钥对在后面会用于登陆服务器"></a>在之后的页面中点击Launch按钮，会弹出这个框，需要设置密钥对，设置完后下载密钥对，之后再Launch Instances，密钥对在后面会用于登陆服务器</h4><center><img src="/images/5.png"/></center><h3 id="启动连接实例"><a href="#启动连接实例" class="headerlink" title="启动连接实例"></a>启动连接实例</h3><h4 id="到instance列表下，选中刚才创建的实例，点击connect"><a href="#到instance列表下，选中刚才创建的实例，点击connect" class="headerlink" title="到instance列表下，选中刚才创建的实例，点击connect"></a>到instance列表下，选中刚才创建的实例，点击connect</h4><center><img src="/images/6.png"/></center><h4 id="会弹出连接方式，教你怎么连接上你创建的实例，先用chomd给文件改变权限，然后用ssh方式登录服务器"><a href="#会弹出连接方式，教你怎么连接上你创建的实例，先用chomd给文件改变权限，然后用ssh方式登录服务器" class="headerlink" title="会弹出连接方式，教你怎么连接上你创建的实例，先用chomd给文件改变权限，然后用ssh方式登录服务器"></a>会弹出连接方式，教你怎么连接上你创建的实例，先用chomd给文件改变权限，然后用ssh方式登录服务器</h4><center><img src="/images/7.png"/></center>至此，实例创建完成。<h3 id="登录服务器，用Shadowsocks搭建VPN"><a href="#登录服务器，用Shadowsocks搭建VPN" class="headerlink" title="登录服务器，用Shadowsocks搭建VPN"></a>登录服务器，用Shadowsocks搭建VPN</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo -s //获取root权限</span><br><span class="line">apt-get update //更新apt-get</span><br><span class="line">apt-get install python-pip //安装pip工具，用于安装shadowsocks</span><br><span class="line">pip install shadowsocks //安装shadowsocks</span><br><span class="line"><span class="built_in">cd</span> ../../usr/<span class="built_in">local</span>/bin/  //进入bin目录下</span><br><span class="line">vim shadowsocks_conf.json //编辑shadowsocks配置</span><br></pre></td></tr></table></figure><p>json文件内容如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;server&quot;</span>:<span class="string">&quot;0.0.0.0&quot;</span>, </span><br><span class="line">    <span class="string">&quot;server_port&quot;</span>: 8838, <span class="comment">#vpn端口号</span></span><br><span class="line">    <span class="string">&quot;password&quot;</span>: <span class="string">&quot;qwertyuiop&quot;</span>, <span class="comment">#连接密码</span></span><br><span class="line">    <span class="string">&quot;local_address&quot;</span>: <span class="string">&quot;127.0.0.1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;local_port&quot;</span>:1080,</span><br><span class="line">    <span class="string">&quot;timeout&quot;</span>:600,</span><br><span class="line">    <span class="string">&quot;method&quot;</span>:<span class="string">&quot;aes-256-cfb&quot;</span>,</span><br><span class="line">    <span class="string">&quot;fast_open&quot;</span>: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>如果想配置多个端口和密码给不同用户，则json文件如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="string">&quot;server&quot;</span>:<span class="string">&quot;0.0.0.0&quot;</span>,</span><br><span class="line"><span class="string">&quot;local_address&quot;</span>:<span class="string">&quot;127.0.0.1&quot;</span>,</span><br><span class="line"><span class="string">&quot;local_port&quot;</span>:1080,</span><br><span class="line"><span class="string">&quot;port_password&quot;</span>:&#123;</span><br><span class="line"><span class="string">&quot;9000&quot;</span>:<span class="string">&quot;123456&quot;</span>,</span><br><span class="line"><span class="string">&quot;9001&quot;</span>:<span class="string">&quot;456&quot;</span>,</span><br><span class="line"><span class="string">&quot;9002&quot;</span>:<span class="string">&quot;789&quot;</span>,</span><br><span class="line">&#125;,</span><br><span class="line"><span class="string">&quot;timeout&quot;</span>:600,</span><br><span class="line"><span class="string">&quot;method&quot;</span>:<span class="string">&quot;aes-128-gcm&quot;</span>,</span><br><span class="line"><span class="string">&quot;fast_open&quot;</span>: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>启动shadowsocks：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssserver -c shadowsocks_conf.json -d start</span><br></pre></td></tr></table></figure><p>注：关闭和重启ss服务命令如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssserver -c shadowsocks_conf.json -d stop     //关闭服务</span><br><span class="line">ssserver -c shadowsocks_conf.json -d restart  //重启服务</span><br></pre></td></tr></table></figure><h3 id="编辑EC2入站规则"><a href="#编辑EC2入站规则" class="headerlink" title="编辑EC2入站规则"></a>编辑EC2入站规则</h3><h4 id="找到对应security-group的名字"><a href="#找到对应security-group的名字" class="headerlink" title="找到对应security group的名字"></a>找到对应security group的名字</h4><center><img src="/images/8.png"/></center><h4 id="进入security-group面板，找到对面的组，然后点击编辑入站规则"><a href="#进入security-group面板，找到对面的组，然后点击编辑入站规则" class="headerlink" title="进入security group面板，找到对面的组，然后点击编辑入站规则"></a>进入security group面板，找到对面的组，然后点击编辑入站规则</h4><center><img src="/images/9.png"/></center><h4 id="自定义入站规则，把刚刚在json配置文件中的端口给加上去，我用的是8838，再加个22端口，ssh默认使用的是22端口，如果修改过，则换为修改后的端口"><a href="#自定义入站规则，把刚刚在json配置文件中的端口给加上去，我用的是8838，再加个22端口，ssh默认使用的是22端口，如果修改过，则换为修改后的端口" class="headerlink" title="自定义入站规则，把刚刚在json配置文件中的端口给加上去，我用的是8838，再加个22端口，ssh默认使用的是22端口，如果修改过，则换为修改后的端口"></a>自定义入站规则，把刚刚在json配置文件中的端口给加上去，我用的是8838，再加个22端口，ssh默认使用的是22端口，如果修改过，则换为修改后的端口</h4><center><img src="/images/10.png"/></center>至此搭建工作完成。<h3 id="配置shadowsocks客户端信息"><a href="#配置shadowsocks客户端信息" class="headerlink" title="配置shadowsocks客户端信息"></a>配置shadowsocks客户端信息</h3><p>本人用的是Mac，分享一个shadowsocks客户端的下载地址，其他版本的各位自行查找,github上也有。再贴上一个<a href="https://shadowsocks.org/en/download/clients.html">shadowsocks的官网</a>，里面各种版本都有，自行选择下载。<br><a id="download" href="https://vpnlyu-dev.s3.amazonaws.com/ShadowsocksX-NG.zip"><i class="fa fa-download"></i><span> 点击下载</span> </a></p><p>安装完后，在 服务器-&gt;服务器设定，填写配置信息，配置信息在刚刚的json文件中配置了，地址不要使用ifconfig显示的IP，在控制台页面中查看公网IP，还是在下方把滚动条向右滑</p><center><img src="/images/11.png"/></center>在这里查看IP<center><img src="/images/12.png"/></center>至此就可以科学上网了。<h3 id="关于BBR优化"><a href="#关于BBR优化" class="headerlink" title="关于BBR优化"></a>关于BBR优化</h3><p>BBR是Google最新开发的TCP拥塞控制算法，目前有着较好的带宽提升效果。</p><h4 id="升级Linux内核"><a href="#升级Linux内核" class="headerlink" title="升级Linux内核"></a>升级Linux内核</h4><p>BBR在Linux kernel 4.9引入。首先检查服务器kernel版本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -r</span><br></pre></td></tr></table></figure><p>如果其显示版本在4.9.0之下(选择了以上的EC2应该不会出现这种情况)，则需要升级Linux内核，否则请忽略下文。<br>更新包管理器：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure><p>查看可用的Linux内核版本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-cache showpkg linux-image</span><br></pre></td></tr></table></figure><p>找到一个你想要升级的Linux内核版本，如“linux-image-4.10.0-22-generic”：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install linux-image-4.10.0-22-generic</span><br></pre></td></tr></table></figure><p>等待安装完成后重启服务器：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo reboot</span><br></pre></td></tr></table></figure><p>删除老的Linux内核：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo purge-old-kernels</span><br></pre></td></tr></table></figure><h4 id="开启BBR"><a href="#开启BBR" class="headerlink" title="开启BBR"></a>开启BBR</h4><p>运行 lsmod | grep bbr，如果结果中没有tcp_bbr，则先运行：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">modprobe tcp_bbr</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;tcp_bbr&quot;</span> &gt;&gt; /etc/modules-load.d/modules.conf</span><br></pre></td></tr></table></figure><p>运行：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;net.core.default_qdisc=fq&quot;</span> &gt;&gt; /etc/sysctl.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;net.ipv4.tcp_congestion_control=bbr&quot;</span> &gt;&gt; /etc/sysctl.conf</span><br></pre></td></tr></table></figure><p>运行：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure><p>保存生效。运行：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sysctl net.ipv4.tcp_available_congestion_control</span><br><span class="line">sysctl net.ipv4.tcp_congestion_control</span><br></pre></td></tr></table></figure><p>若均有bbr，则开启BBR成功。</p><p>以上就是使用AWS的EC2搭建VPN的过程，以及后续有BBR优化，有问题的小伙伴欢迎在评论区留言。</p>]]></content>
-      
-      
+<search>
+  <entry>
+    <title>how to get generic class type in HQL</title>
+    <url>/2019/06/21/Get-Generic-class-type-in-hql/</url>
+    <content><![CDATA[<p>Recently, I faced up a problem in my project. I tried to use generic type in my project, but when it came to the hibernate hql, I can not get the generic type. Following is the solution:</p>
+<h2 id="Let’s-begin"><a href="#Let’s-begin" class="headerlink" title="Let’s begin"></a>Let’s begin</h2><h3 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1:"></a>Step 1:</h3><p>Suppose I have a normal class like findById.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line">    public User findById(Long id) &#123;</span><br><span class="line">        String hql = <span class="string">&quot;FROM User u where u.id = :userId&quot;</span>;</span><br><span class="line">        Session s = sessionFactory.getCurrentSession();</span><br><span class="line">        TypedQuery&lt;User&gt; query = s.createQuery(hql);</span><br><span class="line">        query.setParameter(<span class="string">&quot;userId&quot;</span>, id);</span><br><span class="line">        <span class="built_in">return</span> query.getSingleResult();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+
+<h3 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2:"></a>Step 2:</h3><p>I write a CRUDDaoImpl to let all the class be generic type.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@Repository // new CRUDDaoImpl()</span><br><span class="line">@Transactional</span><br><span class="line">//T=B, ID=IB</span><br><span class="line">public abstract class CRUDDaoImpl&lt;B,IB&gt; implements CRUDDao&lt;B,IB&gt;&#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private SessionFactory sessionFactory;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public B findById(IB ib) &#123;</span><br><span class="line">        String hql = <span class="string">&quot;FROM &quot;</span>+xxx +<span class="string">&quot; b where b.id = :iibb&quot;</span>;</span><br><span class="line">        TypedQuery&lt;B&gt; query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(<span class="string">&quot;iibb&quot;</span>,ib);</span><br><span class="line">        <span class="built_in">return</span> query.getSingleResult();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3:"></a>Step 3:</h3><p>Here we are going to get the class type of B to replace the “xxx” in the HQL.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@Repository // new CRUDDaoImpl()</span><br><span class="line">@Transactional</span><br><span class="line">//T=B, ID=IB</span><br><span class="line">public abstract class CRUDDaoImpl&lt;B,IB&gt; implements CRUDDao&lt;B,IB&gt;&#123;</span><br><span class="line"></span><br><span class="line">    protected Class&lt;B&gt; hQLEntityClazz;</span><br><span class="line"></span><br><span class="line">    public abstract void setHQLEntityClazz();</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private SessionFactory sessionFactory;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public B findById(IB ib) &#123;</span><br><span class="line">        String hql = <span class="string">&quot;FROM &quot;</span>+hQLEntityClazz.getName() +<span class="string">&quot; b where b.id = :iibb&quot;</span>;</span><br><span class="line">        TypedQuery&lt;B&gt; query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(<span class="string">&quot;iibb&quot;</span>,ib);</span><br><span class="line">        <span class="built_in">return</span> query.getSingleResult();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Here we should implement the setHQLEntityClazz method in the UserDaoImpl:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">public class UserDaoImpl extends CRUDDaoImpl&lt;User,Long&gt; implements UserDao&#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private SessionFactory sessionFactory;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    @Autowired</span><br><span class="line">    public void <span class="function"><span class="title">setHQLEntityClazz</span></span>() &#123;</span><br><span class="line">        this.hQLEntityClazz = User.class;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>That’s all, thank you!</p>
+]]></content>
       <categories>
-          
-          <category> AWS </category>
-          
-          <category> VPN </category>
-          
+        <category>Hibernate</category>
+        <category>HQL</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> AWS </tag>
-            
-            <tag> VPN </tag>
-            
-            <tag> EC2 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>科学上网后导致push至GitHub出错</title>
-      <link href="2021/03/19/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E5%90%8E%E5%AF%BC%E8%87%B4push%E8%87%B3GitHub%E5%87%BA%E9%94%99/"/>
-      <url>2021/03/19/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E5%90%8E%E5%AF%BC%E8%87%B4push%E8%87%B3GitHub%E5%87%BA%E9%94%99/</url>
-      
-        <content type="html"><![CDATA[<p>最近使用VPN科学上网时，导致了push到git的速度大幅减慢，最后还出现了push错误的情况，报错情况如下：</p><center><img src="/images/problem.png"/></center>搜索了下说是因为科学上网的原因，但是试了很多方法都没用，以下是我最后解决的方法（也贴上查到的其他方法，希望总有一个适合你）：<a id="more"></a><h3 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h3><p>如果你开启了VPN，很可能是因为代理的问题，这时候设置一下http.proxy就可以了。<br>比如我用的VPN是shadow，先查看当前VPN代理使用的端口号，如下图所示，我的端口号是1087</p><center><img src="/images/port.png" width="50%" height="50%"/></center><p>所以，在git bash命令行中输入以下命令即可：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.proxy 127.0.0.1:1087</span><br><span class="line">git config --global https.proxy 127.0.0.1:1087</span><br></pre></td></tr></table></figure><h3 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.gitconfig</span><br></pre></td></tr></table></figure><p>把里面关于https的配置删掉，然后就可以了，原来代理配置被写入到了文件（这种情况应该适用于关掉VPN之后的情况）</p><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>如果你之前git中已经设置过上述配置，则使用如下命令取消再进行配置即可：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global --<span class="built_in">unset</span> http.proxy</span><br><span class="line">git config --global --<span class="built_in">unset</span> https.proxy</span><br></pre></td></tr></table></figure><p>下面是几个常用的git配置查看命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.proxy <span class="comment">#查看git的http代理配置</span></span><br><span class="line">git config --global https.proxy <span class="comment">#查看git的https代理配置</span></span><br><span class="line">git config --global -l <span class="comment">#查看git的所有配置</span></span><br></pre></td></tr></table></figure>]]></content>
-      
-      
+      <tags>
+        <tag>HQL</tag>
+        <tag>Hibernate</tag>
+        <tag>generic type</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用AWS EC2建立VPN教程</title>
+    <url>/2021/03/31/%E4%BD%BF%E7%94%A8AWS-EC2%E5%BB%BA%E7%AB%8BVPN%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<p>之前一直用的是买的的VPN，价格基本都是几十块一个月不等，其实想自己搭VPN很久了，就是一直懒，哈哈哈哈，前阵子抽空用AWS的EC2搭了一套VPN，粗略的加速了下，测试下来速度比买的Justmysocks速度快了一倍，看个Youtube 1080p完全不卡，进度条随意拖动，教程如下。</p>
+<h3 id="注册AWS账号"><a href="#注册AWS账号" class="headerlink" title="注册AWS账号"></a>注册AWS账号</h3><p>首先要注册一个AWS的账号，英文不好的童鞋可以把语言切换成中文。至于需要填什么，自己打开来看吧，因为我的账号注册了很久了，已经忘记了，应该要绑定一张支持全币种的Visa卡，Amazon会进行信用卡严重，虚拟的扣1刀来验证信用卡是否有效，不过后续会在账单上退回，不必担心。</p>
+<a id="more"></a>
+
+<h3 id="选择服务，切换服务器地区"><a href="#选择服务，切换服务器地区" class="headerlink" title="选择服务，切换服务器地区"></a>选择服务，切换服务器地区</h3><p>点击选择EC2服务，右上角切换服务器所在地区，我选择的是Tokyo(东京)</p>
+<center><img src="/images/1.png"/></center>
+
+<h3 id="创建EC2实例"><a href="#创建EC2实例" class="headerlink" title="创建EC2实例"></a>创建EC2实例</h3><h4 id="点击图中的“Launch-Instance”创建实例"><a href="#点击图中的“Launch-Instance”创建实例" class="headerlink" title="点击图中的“Launch Instance”创建实例"></a>点击图中的“Launch Instance”创建实例</h4><center><img src="/images/2.png"/></center>
+
+<h4 id="选择带Free-tier-eligible的机器，这里选的是Ubuntu-Server-18-04-LTS这款"><a href="#选择带Free-tier-eligible的机器，这里选的是Ubuntu-Server-18-04-LTS这款" class="headerlink" title="选择带Free tier eligible的机器，这里选的是Ubuntu Server 18.04 LTS这款"></a>选择带Free tier eligible的机器，这里选的是Ubuntu Server 18.04 LTS这款</h4><center><img src="/images/3.png"/></center>
+
+<h4 id="之后还是选择带Free-tier-eligible的机器，配置不高，但是搭建VPN还是可以的"><a href="#之后还是选择带Free-tier-eligible的机器，配置不高，但是搭建VPN还是可以的" class="headerlink" title="之后还是选择带Free tier eligible的机器，配置不高，但是搭建VPN还是可以的"></a>之后还是选择带Free tier eligible的机器，配置不高，但是搭建VPN还是可以的</h4><center><img src="/images/4.png"/></center>
+
+<h4 id="在之后的页面中点击Launch按钮，会弹出这个框，需要设置密钥对，设置完后下载密钥对，之后再Launch-Instances，密钥对在后面会用于登陆服务器"><a href="#在之后的页面中点击Launch按钮，会弹出这个框，需要设置密钥对，设置完后下载密钥对，之后再Launch-Instances，密钥对在后面会用于登陆服务器" class="headerlink" title="在之后的页面中点击Launch按钮，会弹出这个框，需要设置密钥对，设置完后下载密钥对，之后再Launch Instances，密钥对在后面会用于登陆服务器"></a>在之后的页面中点击Launch按钮，会弹出这个框，需要设置密钥对，设置完后下载密钥对，之后再Launch Instances，密钥对在后面会用于登陆服务器</h4><center><img src="/images/5.png"/></center>
+
+<h3 id="启动连接实例"><a href="#启动连接实例" class="headerlink" title="启动连接实例"></a>启动连接实例</h3><h4 id="到instance列表下，选中刚才创建的实例，点击connect"><a href="#到instance列表下，选中刚才创建的实例，点击connect" class="headerlink" title="到instance列表下，选中刚才创建的实例，点击connect"></a>到instance列表下，选中刚才创建的实例，点击connect</h4><center><img src="/images/6.png"/></center>
+
+<h4 id="会弹出连接方式，教你怎么连接上你创建的实例，先用chomd给文件改变权限，然后用ssh方式登录服务器"><a href="#会弹出连接方式，教你怎么连接上你创建的实例，先用chomd给文件改变权限，然后用ssh方式登录服务器" class="headerlink" title="会弹出连接方式，教你怎么连接上你创建的实例，先用chomd给文件改变权限，然后用ssh方式登录服务器"></a>会弹出连接方式，教你怎么连接上你创建的实例，先用chomd给文件改变权限，然后用ssh方式登录服务器</h4><center><img src="/images/7.png"/></center>
+至此，实例创建完成。
+
+<h3 id="登录服务器，用Shadowsocks搭建VPN"><a href="#登录服务器，用Shadowsocks搭建VPN" class="headerlink" title="登录服务器，用Shadowsocks搭建VPN"></a>登录服务器，用Shadowsocks搭建VPN</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo -s //获取root权限</span><br><span class="line">apt-get update //更新apt-get</span><br><span class="line">apt-get install python-pip //安装pip工具，用于安装shadowsocks</span><br><span class="line">pip install shadowsocks //安装shadowsocks</span><br><span class="line"><span class="built_in">cd</span> ../../usr/<span class="built_in">local</span>/bin/  //进入bin目录下</span><br><span class="line">vim shadowsocks_conf.json //编辑shadowsocks配置</span><br></pre></td></tr></table></figure>
+<p>json文件内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;server&quot;</span>:<span class="string">&quot;0.0.0.0&quot;</span>, </span><br><span class="line">    <span class="string">&quot;server_port&quot;</span>: 8838, <span class="comment">#vpn端口号</span></span><br><span class="line">    <span class="string">&quot;password&quot;</span>: <span class="string">&quot;qwertyuiop&quot;</span>, <span class="comment">#连接密码</span></span><br><span class="line">    <span class="string">&quot;local_address&quot;</span>: <span class="string">&quot;127.0.0.1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;local_port&quot;</span>:1080,</span><br><span class="line">    <span class="string">&quot;timeout&quot;</span>:600,</span><br><span class="line">    <span class="string">&quot;method&quot;</span>:<span class="string">&quot;aes-256-cfb&quot;</span>,</span><br><span class="line">    <span class="string">&quot;fast_open&quot;</span>: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果想配置多个端口和密码给不同用户，则json文件如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="string">&quot;server&quot;</span>:<span class="string">&quot;0.0.0.0&quot;</span>,</span><br><span class="line">	<span class="string">&quot;local_address&quot;</span>:<span class="string">&quot;127.0.0.1&quot;</span>,</span><br><span class="line">	<span class="string">&quot;local_port&quot;</span>:1080,</span><br><span class="line">	<span class="string">&quot;port_password&quot;</span>:&#123;</span><br><span class="line">		<span class="string">&quot;9000&quot;</span>:<span class="string">&quot;123456&quot;</span>,</span><br><span class="line">		<span class="string">&quot;9001&quot;</span>:<span class="string">&quot;456&quot;</span>,</span><br><span class="line">		<span class="string">&quot;9002&quot;</span>:<span class="string">&quot;789&quot;</span>,</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="string">&quot;timeout&quot;</span>:600,</span><br><span class="line">	<span class="string">&quot;method&quot;</span>:<span class="string">&quot;aes-128-gcm&quot;</span>,</span><br><span class="line">	<span class="string">&quot;fast_open&quot;</span>: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>启动shadowsocks：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssserver -c shadowsocks_conf.json -d start</span><br></pre></td></tr></table></figure>
+<p>注：关闭和重启ss服务命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssserver -c shadowsocks_conf.json -d stop     //关闭服务</span><br><span class="line">ssserver -c shadowsocks_conf.json -d restart  //重启服务</span><br></pre></td></tr></table></figure>
+<h3 id="编辑EC2入站规则"><a href="#编辑EC2入站规则" class="headerlink" title="编辑EC2入站规则"></a>编辑EC2入站规则</h3><h4 id="找到对应security-group的名字"><a href="#找到对应security-group的名字" class="headerlink" title="找到对应security group的名字"></a>找到对应security group的名字</h4><center><img src="/images/8.png"/></center>
+
+<h4 id="进入security-group面板，找到对面的组，然后点击编辑入站规则"><a href="#进入security-group面板，找到对面的组，然后点击编辑入站规则" class="headerlink" title="进入security group面板，找到对面的组，然后点击编辑入站规则"></a>进入security group面板，找到对面的组，然后点击编辑入站规则</h4><center><img src="/images/9.png"/></center>
+
+<h4 id="自定义入站规则，把刚刚在json配置文件中的端口给加上去，我用的是8838，再加个22端口，ssh默认使用的是22端口，如果修改过，则换为修改后的端口"><a href="#自定义入站规则，把刚刚在json配置文件中的端口给加上去，我用的是8838，再加个22端口，ssh默认使用的是22端口，如果修改过，则换为修改后的端口" class="headerlink" title="自定义入站规则，把刚刚在json配置文件中的端口给加上去，我用的是8838，再加个22端口，ssh默认使用的是22端口，如果修改过，则换为修改后的端口"></a>自定义入站规则，把刚刚在json配置文件中的端口给加上去，我用的是8838，再加个22端口，ssh默认使用的是22端口，如果修改过，则换为修改后的端口</h4><center><img src="/images/10.png"/></center>
+至此搭建工作完成。
+
+<h3 id="配置shadowsocks客户端信息"><a href="#配置shadowsocks客户端信息" class="headerlink" title="配置shadowsocks客户端信息"></a>配置shadowsocks客户端信息</h3><p>本人用的是Mac，分享一个shadowsocks客户端的下载地址，其他版本的各位自行查找，github上也有。再贴上一个<a href="https://shadowsocks.org/en/download/clients.html">shadowsocks的官网</a>，里面各种版本都有，自行选择下载。<br><a id="download" href="https://vpnlyu-dev.s3.amazonaws.com/ShadowsocksX-NG.zip"><i class="fa fa-download"></i><span> 点击下载</span> </a></p>
+<p>安装完后，在 服务器-&gt;服务器设定，填写配置信息，配置信息在刚刚的json文件中配置了，地址不要使用ifconfig显示的IP，在控制台页面中查看公网IP，还是在下方把滚动条向右滑</p>
+<center><img src="/images/11.png"/></center>
+在这里查看IP
+<center><img src="/images/12.png"/></center>
+至此就可以科学上网了。
+
+<h3 id="关于BBR优化"><a href="#关于BBR优化" class="headerlink" title="关于BBR优化"></a>关于BBR优化</h3><p>BBR是Google最新开发的TCP拥塞控制算法，目前有着较好的带宽提升效果。</p>
+<h4 id="升级Linux内核"><a href="#升级Linux内核" class="headerlink" title="升级Linux内核"></a>升级Linux内核</h4><p>BBR在Linux kernel 4.9引入。首先检查服务器kernel版本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">uname -r</span><br></pre></td></tr></table></figure>
+<p>如果其显示版本在4.9.0之下(选择了以上的EC2应该不会出现这种情况)，则需要升级Linux内核，否则请忽略下文。<br>更新包管理器：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
+<p>查看可用的Linux内核版本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-cache showpkg linux-image</span><br></pre></td></tr></table></figure>
+<p>找到一个你想要升级的Linux内核版本，如“linux-image-4.10.0-22-generic”：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install linux-image-4.10.0-22-generic</span><br></pre></td></tr></table></figure>
+<p>等待安装完成后重启服务器：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
+<p>删除老的Linux内核：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo purge-old-kernels</span><br></pre></td></tr></table></figure>
+<h4 id="开启BBR"><a href="#开启BBR" class="headerlink" title="开启BBR"></a>开启BBR</h4><p>运行 lsmod | grep bbr，如果结果中没有tcp_bbr，则先运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">modprobe tcp_bbr</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;tcp_bbr&quot;</span> &gt;&gt; /etc/modules-load.d/modules.conf</span><br></pre></td></tr></table></figure>
+<p>运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;net.core.default_qdisc=fq&quot;</span> &gt;&gt; /etc/sysctl.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;net.ipv4.tcp_congestion_control=bbr&quot;</span> &gt;&gt; /etc/sysctl.conf</span><br></pre></td></tr></table></figure>
+<p>运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+<p>保存生效。运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sysctl net.ipv4.tcp_available_congestion_control</span><br><span class="line">sysctl net.ipv4.tcp_congestion_control</span><br></pre></td></tr></table></figure>
+<p>若均有bbr，则开启BBR成功。</p>
+<p>以上就是使用AWS的EC2搭建VPN的过程，以及后续有BBR优化，有问题的小伙伴欢迎在评论区留言。</p>
+]]></content>
       <categories>
-          
-          <category> GitHub </category>
-          
-          <category> hexo </category>
-          
+        <category>AWS</category>
+        <category>VPN</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> hexo </tag>
-            
-            <tag> VPN </tag>
-            
-            <tag> git </tag>
-            
-            <tag> http </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Hello World</title>
-      <link href="2021/02/20/hello-world/"/>
-      <url>2021/02/20/hello-world/</url>
-      
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><p><span id="inline-blue"> blue test block </span><br><span id="inline-purple"> purple test block </span><br><span id="inline-yellow"> yellow test block </span><br><span id="inline-green"> green test block </span></p><!-- <center><b>2017_12_19_视频1</b></center><div id="dplayer0" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer0"),"video":{"url":"https://lc-gluttony.s3.amazonaws.com/qpLO4IIFvprw/adb1aa176e5873c28a74.mp4/520%20LOL.mp4"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> --><p><a id="download" href="https://git-scm.com/download/win"><i class="fa fa-download"></i><span> Download Now</span> </a></p><p><i class="fa fa-pencil"></i>awesome pencil icon test</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><a id="more"></a><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html">Deployment</a></p>]]></content>
-      
-      
+      <tags>
+        <tag>VPN</tag>
+        <tag>AWS</tag>
+        <tag>EC2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>科学上网后导致push至GitHub出错</title>
+    <url>/2021/03/19/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E5%90%8E%E5%AF%BC%E8%87%B4push%E8%87%B3GitHub%E5%87%BA%E9%94%99/</url>
+    <content><![CDATA[<p>最近使用VPN科学上网时，导致了push到git的速度大幅减慢，最后还出现了push错误的情况，报错情况如下：</p>
+<center><img src="/images/problem.png"/></center>
+搜索了下说是因为科学上网的原因，但是试了很多方法都没用，以下是我最后解决的方法（也贴上查到的其他方法，希望总有一个适合你）：
+
+<a id="more"></a>
+
+<h3 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h3><p>如果你开启了VPN，很可能是因为代理的问题，这时候设置一下http.proxy就可以了。<br>比如我用的VPN是shadow，先查看当前VPN代理使用的端口号，如下图所示，我的端口号是1087</p>
+<center><img src="/images/port.png" width="50%" height="50%"/></center>
+
+<p>所以，在git bash命令行中输入以下命令即可：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global http.proxy 127.0.0.1:1087</span><br><span class="line">git config --global https.proxy 127.0.0.1:1087</span><br></pre></td></tr></table></figure>
+<h3 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim ~/.gitconfig</span><br></pre></td></tr></table></figure>
+<p>把里面关于https的配置删掉，然后就可以了，原来代理配置被写入到了文件（这种情况应该适用于关掉VPN之后的情况）</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>如果你之前git中已经设置过上述配置，则使用如下命令取消再进行配置即可：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global --<span class="built_in">unset</span> http.proxy</span><br><span class="line">git config --global --<span class="built_in">unset</span> https.proxy</span><br></pre></td></tr></table></figure>
+<p>下面是几个常用的git配置查看命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global http.proxy <span class="comment">#查看git的http代理配置</span></span><br><span class="line">git config --global https.proxy <span class="comment">#查看git的https代理配置</span></span><br><span class="line">git config --global -l <span class="comment">#查看git的所有配置</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-          
-          <category> hexo </category>
-          
+        <category>GitHub</category>
+        <category>hexo</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> hexo </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>how to get generic class type in HQL</title>
-      <link href="2019/06/21/Get-Generic-class-type-in-hql/"/>
-      <url>2019/06/21/Get-Generic-class-type-in-hql/</url>
-      
-        <content type="html"><![CDATA[<p>Recently, I faced up a problem in my project. I tried to use generic type in my project, but when it came to the hibernate hql, I can not get the generic type. Following is the solution:</p><h2 id="Let’s-begin"><a href="#Let’s-begin" class="headerlink" title="Let’s begin"></a>Let’s begin</h2><h3 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1:"></a>Step 1:</h3><p>Suppose I have a normal class like findById.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">    public User findById(Long id) &#123;</span><br><span class="line">        String hql = <span class="string">&quot;FROM User u where u.id = :userId&quot;</span>;</span><br><span class="line">        Session s = sessionFactory.getCurrentSession();</span><br><span class="line">        TypedQuery&lt;User&gt; query = s.createQuery(hql);</span><br><span class="line">        query.setParameter(<span class="string">&quot;userId&quot;</span>, id);</span><br><span class="line">        <span class="built_in">return</span> query.getSingleResult();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><a id="more"></a><h3 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2:"></a>Step 2:</h3><p>I write a CRUDDaoImpl to let all the class be generic type.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@Repository // new CRUDDaoImpl()</span><br><span class="line">@Transactional</span><br><span class="line">//T=B, ID=IB</span><br><span class="line">public abstract class CRUDDaoImpl&lt;B,IB&gt; implements CRUDDao&lt;B,IB&gt;&#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private SessionFactory sessionFactory;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public B findById(IB ib) &#123;</span><br><span class="line">        String hql = <span class="string">&quot;FROM &quot;</span>+xxx +<span class="string">&quot; b where b.id = :iibb&quot;</span>;</span><br><span class="line">        TypedQuery&lt;B&gt; query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(<span class="string">&quot;iibb&quot;</span>,ib);</span><br><span class="line">        <span class="built_in">return</span> query.getSingleResult();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><h3 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3:"></a>Step 3:</h3><p>Here we are going to get the class type of B to replace the “xxx” in the HQL.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@Repository // new CRUDDaoImpl()</span><br><span class="line">@Transactional</span><br><span class="line">//T=B, ID=IB</span><br><span class="line">public abstract class CRUDDaoImpl&lt;B,IB&gt; implements CRUDDao&lt;B,IB&gt;&#123;</span><br><span class="line"></span><br><span class="line">    protected Class&lt;B&gt; hQLEntityClazz;</span><br><span class="line"></span><br><span class="line">    public abstract void setHQLEntityClazz();</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private SessionFactory sessionFactory;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public B findById(IB ib) &#123;</span><br><span class="line">        String hql = <span class="string">&quot;FROM &quot;</span>+hQLEntityClazz.getName() +<span class="string">&quot; b where b.id = :iibb&quot;</span>;</span><br><span class="line">        TypedQuery&lt;B&gt; query = sessionFactory.getCurrentSession().createQuery(hql).setParameter(<span class="string">&quot;iibb&quot;</span>,ib);</span><br><span class="line">        <span class="built_in">return</span> query.getSingleResult();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>Here we should implement the setHQLEntityClazz method in the UserDaoImpl:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class UserDaoImpl extends CRUDDaoImpl&lt;User,Long&gt; implements UserDao&#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private SessionFactory sessionFactory;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    @Autowired</span><br><span class="line">    public void <span class="function"><span class="title">setHQLEntityClazz</span></span>() &#123;</span><br><span class="line">        this.hQLEntityClazz = User.class;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>That’s all, thank you!</p>]]></content>
-      
-      
+      <tags>
+        <tag>hexo</tag>
+        <tag>git</tag>
+        <tag>http</tag>
+        <tag>VPN</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2021/02/20/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<p><span id="inline-blue"> blue test block </span><br><span id="inline-purple"> purple test block </span><br><span id="inline-yellow"> yellow test block </span><br><span id="inline-green"> green test block </span></p>
+<!-- <center><b>2017_12_19_视频1</b></center>
+<div id="dplayer0" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer0"),"video":{"url":"https://lc-gluttony.s3.amazonaws.com/qpLO4IIFvprw/adb1aa176e5873c28a74.mp4/520%20LOL.mp4"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script> -->
+
+<p><a id="download" href="https://git-scm.com/download/win"><i class="fa fa-download"></i><span> Download Now</span> </a></p>
+<p><i class="fa fa-pencil"></i>awesome pencil icon test</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<a id="more"></a>
+
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html">Deployment</a></p>
+]]></content>
       <categories>
-          
-          <category> Hibernate </category>
-          
-          <category> HQL </category>
-          
+        <category>hexo</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> HQL </tag>
-            
-            <tag> Hibernate </tag>
-            
-            <tag> generic type </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-  
-  
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
 </search>
